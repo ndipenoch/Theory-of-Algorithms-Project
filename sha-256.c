@@ -47,3 +47,23 @@ uint32_t sig1(uint32_t x){
 return ROTR(x,17)^ROTR(x,19)^SHR(x,10);
 }
 
+int main(int argc, char *argv[]){
+
+uint32_t x=0x0f0f0f0f;
+uint32_t y=0xccccccc;
+uint32_t z=0x5555555;
+
+printf("x = % x\n", x);
+printf("y = %x\n", y);
+printf("z = %x\n", z);
+
+printf("Ch(x,y,z) = %08x\n", Ch(x,y,z));
+printf("Maj(x,y,z) = %08x\n", Maj(x,y,z));
+printf("SHR(x,2) = %08x\n", SHR(x,2));
+printf("ROTR(x,2)= %08x\n", ROTR(x,2));
+printf("Sig0(x)  = %08x\n", Sig0(x));
+printf("Sig1(x) = %08x\n", Sig1(x));
+printf("sig0(x) = %08x\n", sig0(x));
+printf("sig1(x) = %08x\n", sig1(x));
+return 0;
+}
