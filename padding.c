@@ -4,6 +4,12 @@
 #include <stdio.h>
 #include <inttypes.h>
 
+union block{
+  uint64_t sixfour[8];
+  uint32_t threetwo[16];
+  uint8_t eight[64];
+};
+
 uint64_t nozerobytes(uint64_t nobits){
 //set the output to be multiples of 512 bits
 //ULL tells the C compiler the value should be a 64 bits
@@ -36,9 +42,12 @@ int main(int argc, char *argv[]){
    //Create an unsign 8 byte interger to read a
   //byt at a time and set a limit of 64 bits
    uint8_t b;
+   union block M;
    uint64_t nobits;
-   for(nobits=0;fread(&b,1,1,infile)==1;nobits +=8){
-   printf("%02" PRIx8, b);
+   uint8_t i;
+
+   for(nobits=0, i=0;fread(&M.eight[i],1,1,infile)==1;nobits +=8){
+   printf("%02" PRIx8, M.eight[i]);
    }
 
    printf("%02" PRIx8, 0x80); //Bits 1000000
