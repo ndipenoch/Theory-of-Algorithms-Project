@@ -1,6 +1,7 @@
 bits
 sha-256
 padding
+unions
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
