@@ -119,8 +119,12 @@ int main(int argc, char *argv[]){
    printf("Error: couldn't open file.\n", argv[1]);
    return 1;
    }
-     //The current padded message block
-     union block M;
+
+
+ //The current padded message block
+  union block M;
+  uint64_t nobits=0;
+  enum flag status =READ;
      
 //Section 5.3.3
 const uint32_t H[] = {0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,
@@ -128,7 +132,7 @@ const uint32_t H[] = {0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,
 };
    
    //Read through all of the padded message blocks.
-   while(nextblock(&M,infile)){
+   while(nextblock(&M,infile,nobits,status)){
    //Calculate the next hash value.
    nexthash(&M,&H);
    }
