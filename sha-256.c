@@ -3,7 +3,7 @@
 //The secure Hash Algorithm 256-bit version
 
 #include<stdio.h>
-#include<stdint.h>
+#include<inttypes.h>
 
 //section 4.2.2
 const uint32_t K[]={0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
@@ -64,7 +64,7 @@ union block{
   uint8_t eight[64];
 };
 
-enum flag {READ, PAD0, PAD1, FINISH};
+enum flag {READ, PAD0, FINISH};
 
 uint64_t nozerobytes(uint64_t nobits){
 //set the output to be multiples of 512 bits
@@ -84,21 +84,37 @@ uint64_t nozerobytes(uint64_t nobits){
 
 int nextblock(union block *M, FILE *infile, uint64_t *nobits, enum flag *status){
 
-uint8_t i;
+if(*status ==FINISH)
+   return 0;
 
-for(*nobits=0, i=0;fread(&M.eight[i],1,1,infile)==1;*nobits +=8){
-   printf("%02" PRIx8, M.eight[i]);
-   }
+if(*status == PAD0){
+   for(int i = 0; i<56; i++)
+      M->eight[i] = 0;
+    M->sixfour[7] = *nobits;
+     *status = FINISH;
+     return 1;
+  }
+   
+size_t nobytesread = fread(M->eight, 1, 64, infile);
+   if(nobytesread == 64)
+      return 1;
 
-   printf("%02" PRIx8, 0x80); //Bits 1000000
-
-   for(uint64_t i = nozerobytes(*nobits); i>0;i--){
-     printf("%02" PRIx8, 0X00);
+   //if we can fit all padding in last block
+   if(nobytesread <56){
+     M->eight[nobytesread]=0x80;
+     for(int i = nobytesread+1; i<56;i++)
+        M->eight[i] = 0;
+      M->sixfour[7] = *nobits;
+       *status = FINISH;
+       return 1;
     }
 
-   printf("%016" PRIx64, "\n", *nobits);
-
-
+  //Otherwise we have between 56(incl) and 64(excl)
+  M->eight[nobytesread] = 0x80;
+  for(int i = nobytesread+1; i<64;i++)
+      M->eight[i] = 0;
+      *status = PAD0;
+      return 1;
 }
 
 
@@ -109,17 +125,19 @@ void nexthash(union block *M, uint32_t *H){
  uint32_t a,b,c,d,e,f,g,h,T1,T2;
  int t;
 
-  for(t=0;t<16;t++)
+  for(t=0;t<16;t++){
     W[t] = M->threetwo[t];
+    }
 
-  for(t= 16; t<64; t++)
-    W[t]=sig1(W[t-2]+W[t-7]+sig0(W[t-15])+ W[t-16];
+  for(t= 16; t<64; t++){
+    W[t]=sig1(W[t-2])+W[t-7]+sig0(W[t-15])+ W[t-16];
+    }
 
- a = H[0]; b = [1]; c = H[2]; d = H[3];
- e = H[4]; f = [5]; g = H[6]; h = H[7];
+ a = H[0]; b = H[1]; c = H[2]; d = H[3];
+ e = H[4]; f = H[5]; g = H[6]; h = H[7];
 
  for(t=0;t<64;t++){
-   T1 = h + Sig1(e)+Ch(e,f,g)+ k[t] + W[t];
+   T1 = h + Sig1(e)+Ch(e,f,g)+ K[t] + W[t];
    T2 = Sig0(a) + Maj(a,b,c);
    h = g; g=f; f=e; e= d + T1;
    d = c; c=b; b=a; a= T1 + T2;
@@ -157,13 +175,13 @@ const uint32_t H[] = {0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,
 };
    
    //Read through all of the padded message blocks.
-   while(nextblock(&M,infile,nobits,status)){
+   while(nextblock(&M,infile,&nobits,&status)){
    //Calculate the next hash value.
-   nexthash(&M,&H);
+   nexthash(&M,H);
    }
 
   for(int i=0;i<0;i++)
-     printf("%02" PRIX32, H[i];
+     printf("%02" PRIX32 "", H[i]);
   printf("\n");
    
   fclose(infile);
