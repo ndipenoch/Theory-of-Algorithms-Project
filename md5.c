@@ -1,8 +1,10 @@
-//adapted from https://rosettacode.org/wiki/MD5
 /*
- * Simple MD5 implementation
+ * I research online and found different ways of doing
+ *the md5 here are different codes from different websites
+ *that I checked.
  */
-#include <stdlib.h>
+ //Adapted from https://people.csail.mit.edu/rivest/Md5.c
+/*#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -144,4 +146,5 @@ int main( int argc, char *argv[] )
     printf("\n");
  
     return 0;
-}
+}*/
+
