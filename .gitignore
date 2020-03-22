@@ -2,6 +2,9 @@ bits
 sha-256
 padding
 unions
+md5
+md5test
+md5test1
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
