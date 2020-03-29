@@ -379,6 +379,17 @@ typedef struct {
    uint state[4]; 
 } MD5_CTX; 
 
+void md5_init(MD5_CTX *ctx)
+{
+   ctx->datalen = 0;
+   ctx->bitlen[0] = 0;
+   ctx->bitlen[1] = 0;
+   ctx->state[0] = 0x67452301;
+   ctx->state[1] = 0xEFCDAB89;
+   ctx->state[2] = 0x98BADCFE;
+   ctx->state[3] = 0x10325476;
+}
+
 void md5_transform(MD5_CTX *ctx, uchar data[])
 {
    uint a,b,c,d,m[16],i,j;
@@ -467,3 +478,5 @@ void md5_transform(MD5_CTX *ctx, uchar data[])
    ctx->state[2] += c;
    ctx->state[3] += d;
 }
+
+
