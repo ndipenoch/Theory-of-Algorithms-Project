@@ -494,3 +494,44 @@ void md5_update(MD5_CTX *ctx, uchar data[], uint len)
    }
 }
 
+void md5_final(MD5_CTX *ctx, uchar hash[])
+{
+   uint i;
+
+   i = ctx->datalen;
+
+   // Pad whatever data is left in the buffer.
+   if (ctx->datalen < 56) {
+      ctx->data[i++] = 0x80;
+      while (i < 56)
+         ctx->data[i++] = 0x00;
+   }
+   else if (ctx->datalen >= 56) {
+      ctx->data[i++] = 0x80;
+      while (i < 64)
+         ctx->data[i++] = 0x00;
+      md5_transform(ctx,ctx->data);
+      memset(ctx->data,0,56);
+   }
+
+   // Append to the padding the total message's length in bits and transform.
+   DBL_INT_ADD(ctx->bitlen[0],ctx->bitlen[1],8 * ctx->datalen);
+   ctx->data[56] = ctx->bitlen[0];
+   ctx->data[57] = ctx->bitlen[0] >> 8;
+   ctx->data[58] = ctx->bitlen[0] >> 16;
+   ctx->data[59] = ctx->bitlen[0] >> 24;
+   ctx->data[60] = ctx->bitlen[1];
+   ctx->data[61] = ctx->bitlen[1] >> 8;
+   ctx->data[62] = ctx->bitlen[1] >> 16;
+   ctx->data[63] = ctx->bitlen[1] >> 24;
+   md5_transform(ctx,ctx->data);
+
+   // Since this implementation uses little endian byte ordering and MD uses big endian,
+   // reverse all the bytes when copying the final state to the output hash.
+   for (i=0; i < 4; ++i) {
+      hash[i]    = (ctx->state[0] >> (i*8)) & 0x000000ff;
+      hash[i+4]  = (ctx->state[1] >> (i*8)) & 0x000000ff;
+      hash[i+8]  = (ctx->state[2] >> (i*8)) & 0x000000ff;
+      hash[i+12] = (ctx->state[3] >> (i*8)) & 0x000000ff;
+   }
+} 
