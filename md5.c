@@ -349,6 +349,8 @@ int main(int argc, char **argv) {
 }*/
 
 //Adapted from https://people.csail.mit.edu/rivest/Md5.c
+//Compile with : Compile with: gcc -o md5 -O3 -lm md5.c
+//Run with : .\md5 "your string here"
 #include <stdio.h>
 #include <string.h>
 
@@ -543,3 +545,21 @@ void print_hash(char hash[])
       printf("%02x",hash[idx]&0x000000ff); 
    printf("\n"); 
 } 
+
+int main(int argc, char **argv)
+{
+   char hash[16];
+   char *msg = argv[1];
+   unsigned int len;
+   MD5_CTX ctx;
+
+   // First hash
+   md5_init(&ctx);
+   md5_update(&ctx,msg,strlen(msg));
+   md5_final(&ctx,hash);
+   print_hash(hash);
+
+   getchar();
+   return 0;
+}
+
