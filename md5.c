@@ -479,4 +479,18 @@ void md5_transform(MD5_CTX *ctx, uchar data[])
    ctx->state[3] += d;
 }
 
+void md5_update(MD5_CTX *ctx, uchar data[], uint len)
+{
+   uint t,i;
+
+   for (i=0; i < len; ++i) {
+      ctx->data[ctx->datalen] = data[i];
+      ctx->datalen++;
+      if (ctx->datalen == 64) {
+         md5_transform(ctx,ctx->data);
+         DBL_INT_ADD(ctx->bitlen[0],ctx->bitlen[1],512);
+         ctx->datalen = 0;
+      }
+   }
+}
 
