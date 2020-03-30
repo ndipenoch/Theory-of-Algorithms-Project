@@ -1,7 +1,6 @@
 # Theory-of-Algorithms-Project
-Mark Ndipenoch
 This document describes the MD5 message-digest algorithm. The algorithm takes as input a
-message of arbitrary length and produces as output a "message digest" of the input.
+message of an arbitrary length and produces as output a "message digest" of the input.
 The MD5 algorithm is an extension of the MD4 message-digest algorithm.
 
 #### How to run the porject
@@ -9,13 +8,13 @@ The MD5 algorithm is an extension of the MD4 message-digest algorithm.
 2. Cd to the md5.c file directory
 3. Compile the code by executing : Compile with: gcc -o md5 -O3 -lm md5.c
 4. The run the code by executing: .\md5 "your string here"
-5. After that the result will be printed to your console.
+5. After that the result will be printed to your console. See image below.
 
 ![](/run.PNG)
 
 #### Research
 I watched and followed the lecturer's video on how to code up SHA56 in C. The final version of the SHA56 is also included in this repository in the file sha-256.c.
-Also, I looked up online how different people have done the MD5 message-digest algorithm in C and different langues. Two particular examples caught my attention. I started by following these examples and doing my project like in the examples. So, I can understand better and the different concepts about MD5. I finally ended up doing my project in 3 different ways. The 3rd way was adapted from the two previous ways. All three ways are included in the md5.c file. The first two ways are commented out.
+Also, I looked up online on how different people have done the MD5 message-digest algorithm in C and in different langues. Two particular examples caught my attention. I started by following these examples and doing my project like in the examples. So, I can understand better the different concepts about MD5. I finally ended up doing my project in 3 different ways. The 3rd way was adapted from the two previous ways. All three ways are included in the md5.c file. The first two ways are commented out.
 Here are some links are researched on 
 - [Encode a string using an MD5 algorithm](https://rosettacode.org/wiki/MD5).
 - [Simple MD5 implementation](https://gist.github.com/creationix/4710780).
@@ -43,7 +42,7 @@ d is a 32-bit register. These registers are initialized to the hexadecimal value
    c = 0x98BADCFE;
    d = 0x10325476;
    
-I then define four auxiliary functions that each take as input of 32-bit words and
+I then define four auxiliary functions that each takes an input of 32-bit words and
 produce as output one 32-bit word.
  F(X,Y,Z) = XY v not(X) Z
  G(X,Y,Z) = XZ v Y not(Z)
@@ -52,3 +51,7 @@ produce as output one 32-bit word.
 The message is then transform as much aspossible into 4 rounds of 16 each.
 
 The final output is then printed as an hexadecimal.
+
+#### Tool used
+-Google Cloud SSH
+-GitHup
