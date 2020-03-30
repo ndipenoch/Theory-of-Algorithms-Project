@@ -301,7 +301,8 @@ int main(int argc, char **argv) {
     return 0;
 }*/
 
-//Adapted from https://people.csail.mit.edu/rivest/Md5.c
+//Adapted from https://people.csail.mit.edu/rivest/Md5.c and
+//http://altronic-srl.com.ar/md5%20algoritmo.pdf
 //Compile with : Compile with: gcc -o md5 -O3 -lm md5.c
 //Run with : .\md5 "your string here"
 #include <stdio.h>
@@ -314,11 +315,13 @@ int main(int argc, char **argv) {
 #define DBL_INT_ADD(a,b,c) if (a > 0xffffffff - c) ++b; a += c;
 #define ROTLEFT(a,b) ((a << b) | (a >> (32-b)))
 
+// F, G, H and I are basic MD5 functions.
 #define F(x,y,z) ((x & y) | (~x & z))
 #define G(x,y,z) ((x & z) | (y & ~z))
 #define H(x,y,z) (x ^ y ^ z)
 #define I(x,y,z) (y ^ (x | ~z))
 
+// FF, GG, HH, and II transformations for rounds 1, 2,3 and 4.
 #define FF(a,b,c,d,m,s,t) { a += F(b,c,d) + m + t; \
                             a = b + ROTLEFT(a,s); }
 #define GG(a,b,c,d,m,s,t) { a += G(b,c,d) + m + t; \
@@ -328,12 +331,15 @@ int main(int argc, char **argv) {
 #define II(a,b,c,d,m,s,t) { a += I(b,c,d) + m + t; \
                             a = b + ROTLEFT(a,s); }
 typedef struct { 
+   /* input buffer */
    uchar data[64]; 
    uint datalen; 
-   uint bitlen[2]; 
+   uint bitlen[2];
+   /* state (abcd) */
    uint state[4]; 
 } MD5_CTX; 
 
+//Initialize the constants and begins an MD5 operation.
 void md5_init(MD5_CTX *ctx)
 {
    ctx->datalen = 0;
@@ -345,6 +351,7 @@ void md5_init(MD5_CTX *ctx)
    ctx->state[3] = 0x10325476;
 }
 
+//Transforms the state based on block.
 void md5_transform(MD5_CTX *ctx, uchar data[])
 {
    uint a,b,c,d,m[16],i,j;
@@ -434,6 +441,10 @@ void md5_transform(MD5_CTX *ctx, uchar data[])
    ctx->state[3] += d;
 }
 
+/* This continues an MD5 message-digest
+ operation, processing another message block, and updating the
+ context.
+ */
 void md5_update(MD5_CTX *ctx, uchar data[], uint len)
 {
    uint t,i;
@@ -449,6 +460,9 @@ void md5_update(MD5_CTX *ctx, uchar data[], uint len)
    }
 }
 
+/* This  ends an MD5 message-digest operation, writing the
+ the message digest and zeroizing the context.
+ */
 void md5_final(MD5_CTX *ctx, uchar hash[])
 {
    uint i;
@@ -491,6 +505,7 @@ void md5_final(MD5_CTX *ctx, uchar hash[])
    }
 }
 
+//print the result as a hexadecimal
 void print_hash(char hash[]) 
 {
    int idx; 
@@ -499,6 +514,7 @@ void print_hash(char hash[])
    printf("\n"); 
 } 
 
+//Main method takes a string as an input
 int main(int argc, char **argv)
 {
    char hash[16];
@@ -506,7 +522,6 @@ int main(int argc, char **argv)
    unsigned int len;
    MD5_CTX ctx;
 
-   // First hash
    md5_init(&ctx);
    md5_update(&ctx,msg,strlen(msg));
    md5_final(&ctx,hash);
