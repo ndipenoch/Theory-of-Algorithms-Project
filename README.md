@@ -43,8 +43,8 @@ The message is then transform as much aspossible into 4 rounds of 16 each.
 The final output is then printed as an hexadecimal.
 
 #### Sample and Results Examples
--Input: "abc" OutPut: "900150983cd24fb0d6963f7d28e17f72"
--Input: "The quick brown fox jumps over the lazy dog" OutPut: "9e107d9d372bb6826bd81d3542a419d6"
+-Input: "abc" OutPut: "900150983cd24fb0d6963f7d28e17f72"<br/>
+-Input: "The quick brown fox jumps over the lazy dog" OutPut: "9e107d9d372bb6826bd81d3542a419d6"<br/>
 -Input: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" OutPut: "d174ab98d277d9f5a5611c2c9f419d9f"
 
 #### Tool used
