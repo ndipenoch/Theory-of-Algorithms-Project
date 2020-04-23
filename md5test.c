@@ -17,13 +17,14 @@ main (int argc, char **argv)
              We distinguish them by their indices. */
           {"help",     no_argument,       0, 'h'},
           {"version",  no_argument,       0, 'v'},
-          {"test",  required_argument,    0, 't'},
+          {"test",     no_argument,       0, 't'},
+          {"run",      required_argument, 0, 'r'},
           {0, 0, 0, 0}
         };
       /* getopt_long stores the option index here. */
       int option_index = 0;
 
-      c = getopt_long (argc, argv, "hvt",
+      c = getopt_long (argc, argv, "hvtr:",
                        long_options, &option_index);
 
       /* Detect the end of the options. */
@@ -51,7 +52,11 @@ main (int argc, char **argv)
           break;
 
         case 't':
-          printf ("test option `%s'\n", optarg);
+          printf ("test option `%s'\n");
+          break;
+
+        case 'r':
+          printf ("Run option  `%s'\n", optarg);
           break;
 
         case '?':
@@ -72,8 +77,6 @@ main (int argc, char **argv)
       putchar ('\n');
     
    }
-
-   printf("hello outside main loop \n");
 
   exit (0);
 }

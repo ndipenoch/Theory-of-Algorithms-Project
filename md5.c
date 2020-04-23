@@ -307,6 +307,8 @@ int main(int argc, char **argv) {
 //Run with : .\md5 "your string here"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <getopt.h>
 
 #define uchar unsigned char
 #define uint unsigned int
@@ -514,19 +516,88 @@ void print_hash(char hash[])
    printf("\n"); 
 } 
 
+//gitopt adpated from https://github.com/ndipenoch/Theory-of-Algorithms-Project/blob/master/md5test.c
 //Main method takes a string as an input
 int main(int argc, char **argv)
 {
-   char hash[16];
-   char *msg = argv[1];
-   unsigned int len;
-   MD5_CTX ctx;
+  int c;
+  char hash[16];
+  char *msg;
 
-   md5_init(&ctx);
-   md5_update(&ctx,msg,strlen(msg));
-   md5_final(&ctx,hash);
-   print_hash(hash);
 
-   getchar();
-   return 0;
+  while (1)
+    {
+      static struct option long_options[] =
+        {
+          /* These options don’t set a flag.
+             We distinguish them by their indices. */
+          {"help",     no_argument,       0, 'h'},
+          {"version",  no_argument,       0, 'v'},
+          {"test",     no_argument,       0, 't'},
+		      {"run",  required_argument,     0, 'r'},
+          {0, 0, 0, 0}
+        };
+      /* getopt_long stores the option index here. */
+      int option_index = 0;
+      /*r or --run takes an argument*/
+      c = getopt_long (argc, argv, "hvtr:",
+                       long_options, &option_index);
+
+      /* Detect the end of the options. */
+      if (c == -1)
+        break;
+
+      switch (c)
+        {
+        case 0:
+          /* If this option set a flag, do nothing else now. */
+          if (long_options[option_index].flag != 0)
+            break;
+          printf ("option %s", long_options[option_index].name);
+          if (optarg)
+            printf (" with arg %s", optarg);
+          printf ("\n");
+          break;
+
+        case 'h':
+          puts ("help option -h\n");
+          break;
+
+        case 'v':
+          puts ("version option -v\n");
+          break;
+
+        case 't':
+          printf ("test option '\n");
+          break;
+
+		case 'r':
+          msg = optarg;
+          MD5_CTX ctx;
+
+          md5_init(&ctx);
+          md5_update(&ctx,msg,strlen(msg));
+          md5_final(&ctx,hash);
+          print_hash(hash);
+          break;
+
+        case '?':
+          /* getopt_long already printed an error message. */
+          break;
+
+        default:
+          abort ();
+        }
+    }
+
+  /* Print any remaining command line arguments (not options). */
+  if (optind < argc)
+    {
+      printf ("non-option ARGV-elements: ");
+      while (optind < argc)
+        printf ("%s ", argv[optind++]);
+      putchar ('\n');
+
+   }
+exit (0);
 }
