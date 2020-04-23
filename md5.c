@@ -508,12 +508,20 @@ void md5_final(MD5_CTX *ctx, uchar hash[])
 }
 
 //print the result as a hexadecimal
-void print_hash(char hash[]) 
+const char * print_hash(char hash[]) 
 {
+   char s1[50];
+   static  char tagstr[1000] = "";
    int idx; 
-   for (idx=0; idx < 16; idx++) 
+   for (idx=0; idx < 16; idx++) {
       printf("%02x",hash[idx]&0x000000ff); 
-   printf("\n"); 
+      //convert the hexadecimal value to a string
+      sprintf(s1, "%02x",hash[idx]&0x000000ff);
+      //Concatenate the 16 substrings to a single string
+      strcat(tagstr, s1);
+      }
+   printf("\n");
+   return tagstr;
 } 
 
 //gitopt adpated from https://github.com/ndipenoch/Theory-of-Algorithms-Project/blob/master/md5test.c
@@ -523,6 +531,7 @@ int main(int argc, char **argv)
   int c;
   char hash[16];
   char *msg;
+  MD5_CTX ctx;
 
 
   while (1)
@@ -575,12 +584,23 @@ int main(int argc, char **argv)
           break;
 
         case 't':
-          printf ("test option '\n");
+          printf("\n");
+          char testMsg[] = "abc";
+
+          md5_init(&ctx);
+          md5_update(&ctx,testMsg,strlen(testMsg));
+          md5_final(&ctx,hash);
+          const char* strtest = print_hash(hash);
+          if (strcmp(strtest,"900150983cd24fb0d6963f7d28e17f72") == 0){
+               printf("PASSED\n");
+               }
+          else{
+               printf("FAILED\n");
+               }
           break;
 
 		case 'r':
           msg = optarg;
-          MD5_CTX ctx;
 
           md5_init(&ctx);
           md5_update(&ctx,msg,strlen(msg));
