@@ -304,7 +304,7 @@ int main(int argc, char **argv) {
 //Adapted from https://people.csail.mit.edu/rivest/Md5.c and
 //http://altronic-srl.com.ar/md5%20algoritmo.pdf
 //Compile with : Compile with: gcc -o md5 -O3 -lm md5.c
-//Run with : .\md5 "your string here"
+//Run with : .\md5 --run  "your string here"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -560,7 +560,14 @@ int main(int argc, char **argv)
           break;
 
         case 'h':
-          puts ("help option -h\n");
+          printf ("Compile with : Compile with: gcc -o md5 -O3 -lm md5.c \n");
+          printf ("Run with : .\\md5 --run 'your string here' \n");
+          printf ("To run tests : .\\md5 --test \n"); 
+          printf ("To check the version : .\\md5 --version \n"); 
+          printf ("To get help : .\\md5 --help \n");
+          printf ("Below are samples of inputs and results: \n");
+          printf ("1) Input abc and Output: 900150983cd24fb0d6963f7d28e17f72 \n");
+          printf ("2) Input 0123456789 and Output: 781e5e245d69b566979b86e28d23f2c7 \n");
           break;
 
         case 'v':
