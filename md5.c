@@ -511,16 +511,17 @@ void md5_final(MD5_CTX *ctx, uchar hash[])
 const char * print_hash(char hash[]) 
 {
    char s1[50];
-   static  char tagstr[1000] = "";
-   int idx; 
-   for (idx=0; idx < 16; idx++) {
-      printf("%02x",hash[idx]&0x000000ff); 
+   static  char tagstr[1000] ="";
+   int idx;
+   //Clear array and always start from an empty array
+   memset(tagstr, 0, sizeof(tagstr));
+   for(idx=0; idx < 16; idx++) {
+      // printf("%02x",hash[idx]&0x000000ff); 
       //convert the hexadecimal value to a string
       sprintf(s1, "%02x",hash[idx]&0x000000ff);
       //Concatenate the 16 substrings to a single string
       strcat(tagstr, s1);
       }
-   printf("\n");
    return tagstr;
 } 
 
@@ -584,19 +585,42 @@ int main(int argc, char **argv)
           break;
 
         case 't':
-          printf("\n");
-          char testMsg[] = "abc";
+          printf("");
 
+         char testInputs[10][1000]=
+          {"","a","abc","message digest","abcdefghijklmnopqrstuvwxyz","0123456789",
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+          "The quick brown fox jumps over the lazy dog",
+          "The quick brown fox jumped over the lazy dog's back",
+          "12345678901234567890123456789012345678901234567890123456789012345678901234567890"};
+          char testOutputs[10][1000]=
+          {"d41d8cd98f00b204e9800998ecf8427e","0cc175b9c0f1b6a831c399e269772661",
+          "900150983cd24fb0d6963f7d28e17f72","f96b697d7cb7938d525a2f31aaf161d0",
+          "c3fcd3d76192e4007dfb496cca67e13b","781e5e245d69b566979b86e28d23f2c7",
+          "d174ab98d277d9f5a5611c2c9f419d9f","9e107d9d372bb6826bd81d3542a419d6",
+          "e38ca1d920c4b8b8d3946b2c72f01680","57edf4a22be3c955ac49da2e2107b67a"};
+          int loop;
+          
+          /*const char* testRslt = print_hash(hash);
+          printf("--Return Rlst---%s\n", testRslt);*/
+
+          //print all strings
+          for(loop=0;loop<10;loop++){
+          printf("");
           md5_init(&ctx);
-          md5_update(&ctx,testMsg,strlen(testMsg));
+          md5_update(&ctx,testInputs[loop],strlen(testInputs[loop]));
           md5_final(&ctx,hash);
-          const char* strtest = print_hash(hash);
-          if (strcmp(strtest,"900150983cd24fb0d6963f7d28e17f72") == 0){
+          const char* testRslt = print_hash(hash);
+          printf("Input:     %s\n", testInputs[loop]);
+          printf("Expected:  %s\n", testRslt);
+          printf("Actual:    %s\n", testOutputs[loop]);
+          if (strcmp(testRslt,testOutputs[loop]) == 0){
                printf("PASSED\n");
                }
           else{
                printf("FAILED\n");
                }
+          }
           break;
 
 		case 'r':
@@ -605,7 +629,8 @@ int main(int argc, char **argv)
           md5_init(&ctx);
           md5_update(&ctx,msg,strlen(msg));
           md5_final(&ctx,hash);
-          print_hash(hash);
+          const char* result =  print_hash(hash);
+          printf("%s\n",result);
           break;
 
         case '?':
