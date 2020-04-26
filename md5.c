@@ -305,6 +305,7 @@ int main(int argc, char **argv) {
 //http://altronic-srl.com.ar/md5%20algoritmo.pdf
 //Compile with : Compile with: gcc -o md5 -O3 -lm md5.c
 //Run with : .\md5 --run  "your string here"
+//Run test cases: .\md5 --test
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -368,7 +369,8 @@ void md5_transform(MD5_CTX *ctx, uchar data[])
    b = ctx->state[1];
    c = ctx->state[2];
    d = ctx->state[3];
-
+   
+   //Round 1
    FF(a,b,c,d,m[0],  7,0xd76aa478);
    FF(d,a,b,c,m[1], 12,0xe8c7b756);
    FF(c,d,a,b,m[2], 17,0x242070db);
@@ -385,7 +387,8 @@ void md5_transform(MD5_CTX *ctx, uchar data[])
    FF(d,a,b,c,m[13],12,0xfd987193);
    FF(c,d,a,b,m[14],17,0xa679438e);
    FF(b,c,d,a,m[15],22,0x49b40821);
-
+   
+   //Round 2
    GG(a,b,c,d,m[1],  5,0xf61e2562);
    GG(d,a,b,c,m[6],  9,0xc040b340);
    GG(c,d,a,b,m[11],14,0x265e5a51);
@@ -403,6 +406,7 @@ void md5_transform(MD5_CTX *ctx, uchar data[])
    GG(c,d,a,b,m[7], 14,0x676f02d9);
    GG(b,c,d,a,m[12],20,0x8d2a4c8a);
 
+   //Round 3
    HH(a,b,c,d,m[5],  4,0xfffa3942);
    HH(d,a,b,c,m[8], 11,0x8771f681);
    HH(c,d,a,b,m[11],16,0x6d9d6122);
@@ -420,6 +424,7 @@ void md5_transform(MD5_CTX *ctx, uchar data[])
    HH(c,d,a,b,m[15],16,0x1fa27cf8);
    HH(b,c,d,a,m[2], 23,0xc4ac5665);
 
+   //Round 4
    II(a,b,c,d,m[0],  6,0xf4292244);
    II(d,a,b,c,m[7], 10,0x432aff97);
    II(c,d,a,b,m[14],15,0xab9423a7);
