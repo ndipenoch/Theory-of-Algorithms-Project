@@ -1,5 +1,5 @@
 <p align="center">
-  <b>Theory of Algorithms</b><br>
+  <b>MD5 Message-Digest Algorithm</b><br>
 </p>
 
 
