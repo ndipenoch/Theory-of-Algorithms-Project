@@ -1,5 +1,5 @@
 <p align="center">
-  <b>Theory of Algorithms</b><br>
+  <b>MD5 message-Digest Algorithm</b><br>
 </p>
 
 Student ID: G00352031<br/>
