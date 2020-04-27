@@ -162,7 +162,7 @@ intermediate hash value and an accompanying message block, propagate through the
 Also, the setting of digital certificates is not entirely safe as Lenstra and de Weger[11] presented two colliding X.509 certificates with different public keys, but with identical signatures from a Certificate Authority. Although as they contain the same identity there is no realistic abuse scenario.
 <h4>Running Time</h4>
 The MD5 message-digest algorithm  was designed to be fast and it is. This is demonstrated as seen in the image below when the Running Time is compared to SHA256 Algorithm by D Rachmawati1, J T Tarigan1 and A B C Ginting,[9] in section 3.3.
-
+ ![](/runningTime.PNG)
 <p align="center">
   <b>Conclusion</b><br/>
 </p>
@@ -171,19 +171,18 @@ a "fingerprint" or message digest of a message of arbitrary length. It is conjec
 <p align="center">
   <b> References</b><br/>
 </p>
-1-	Md5 message-digest  paper by Ronald L. Rivest  - 
- http://altronic-srl.com.ar/md5%20algoritmo.pdf
-2-	Ron Rivest. Request for comments: 1321, the md5 message-digest algorithm. - https://tools.ietf.org/html/rfc1321
-3-	RSA Data Security, Inc. MD5 Message Digest Algorithm - https://people.csail.mit.edu/rivest/Md5.c
-4-	Xiaoyun Wang and Hongbo Yu, How to break MD5 and other hash functions, EUROCRYPT 2005 (Ronald Cramer, ed.), LNCS, vol. 3494, Springer, 2005, pp. 19–35. - https://link.springer.com/content/pdf/10.1007/11426639_2.pdf
+1-	[Md5 message-digest  paper by Ronald L. Rivest](http://altronic-srl.com.ar/md5%20algoritmo.pdf) </br>
+2-	[Ron Rivest. Request for comments: 1321, the md5 message-digest algorithm](https://tools.ietf.org/html/rfc1321) </br>
+3-	[RSA Data Security, Inc. MD5 Message Digest Algorithm ](https://people.csail.mit.edu/rivest/Md5.c) </br>
+4-	[Xiaoyun Wang and Hongbo Yu, How to break MD5 and other hash functions, EUROCRYPT 2005 (Ronald Cramer, ed.), LNCS, vol. 3494, Springer, 2005, pp. 19–35](https://link.springer.com/content/pdf/10.1007/11426639_2.pdf) </br>
 5-	Hans Dobbertin, Cryptanalysis of MD5 compress, 1996, presented at the rump session of Eurocrypt’96. </br>
-6-	M.M.J. Stevens (June 2007). "On Collisions for MD5" –
- https://www.win.tue.nl/hashclash/On%20Collisions%20for%20MD5%20-%20M.M.J.%20Stevens.pdf
-7-	Collisions for the compression function of MD5 by B. den Boer and A. Bosselaers - https://link.springer.com/content/pdf/10.1007/3-540-48285-7_26.pdf
-8-	The MD4 message digest algorithm by Rivest, Ronald L
-https://link.springer.com/content/pdf/10.1007/3-540-38424-3_22.pdf
-9-	Comparison of Running Time between MD5 Algorithm and SHA256 Algorithm  by Rachmawati_2018, section 3.3.
-https://iopscience.iop.org/article/10.1088/1742-6596/978/1/012116/pdf </br>
-10-	Xiaoyun Wang, Dengguo Feng, Xuejia Lai, and Hongbo Yu, Collisions for hash functions  MD4, MD5, HAVAL-128 and RIPEMD, Cryptology ePrint Archive, Report 2004/199, 2004 – 
-https://www.researchgate.net/profile/Xuejia_Lai/publication/220336420_Collisions_for_Hash_Functions_MD4_MD5_HAVAL-128_and_RIPEMD/links/0deec525de0417d8eb000000.pdf
-11-	Arjen K. Lenstra and Benne de Weger, On the possibility of constructing meaningful hash collisions for public keys, ACISP 2005 (Colin Boyd and Juan Manuel Gonz´alez Nieto, eds.), LNCS, vol. 3574, Springer, 2005, pp. 267–279.	https://link.springer.com/chapter/10.1007/11506157_23
+6-	[M.M.J. Stevens (June 2007). "On Collisions for MD5"](https://www.win.tue.nl/hashclash/On%20Collisions%20for%20MD5%20-%20M.M.J.%20Stevens.pdf) </br>
+
+7-	[Collisions for the compression function of MD5 by B. den Boer and A. Bosselaers](https://link.springer.com/content/pdf/10.1007/3-540-48285-7_26.pdf)</br>
+8-	[The MD4 message digest algorithm by Rivest, Ronald L](https://link.springer.com/content/pdf/10.1007/3-540-38424-3_22.pdf)</br>
+
+9-	[Comparison of Running Time between MD5 Algorithm and SHA256 Algorithm  by Rachmawati_2018, section 3.3.](https://iopscience.iop.org/article/10.1088/1742-6596/978/1/012116/pdf)</br>
+
+10-	[Xiaoyun Wang, Dengguo Feng, Xuejia Lai, and Hongbo Yu, Collisions for hash functions  MD4, MD5, HAVAL-128 and RIPEMD, Cryptology ePrint Archive, Report 2004/199, 2004](https://www.researchgate.net/profile/Xuejia_Lai/publication/220336420_Collisions_for_Hash_Functions_MD4_MD5_HAVAL-128_and_RIPEMD/links/0deec525de0417d8eb000000.pdf)</br>
+11-	[Arjen K. Lenstra and Benne de Weger, On the possibility of constructing meaningful hash collisions for public keys, ACISP 2005 (Colin Boyd and Juan Manuel Gonz´alez Nieto, eds.), LNCS, vol. 3574, Springer, 2005, pp. 267–279.](https://link.springer.com/chapter/10.1007/11506157_23)</br>
+	
