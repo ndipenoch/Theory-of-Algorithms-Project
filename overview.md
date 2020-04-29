@@ -8,11 +8,12 @@ Name: Mark Ndipenoch<br/>
 <p align="center">
   <b>Abstract</b><br>
 </p>
+This is my project of Theory of Algorithms and it is about MD5 message-digest algorithm [1,2,3]. 
 Due to the rapid advancement of technology, the integrity of documents and security protocols should be preserved.
 One of the ways to achieve this is by using a digital signature. 
 A digital signature is a specific code which is generated from the function of producing an electronic “fingerprints.” 
 One of the algorithms that is used to create the digital signature is a hash function. There are many hash functions.
-One of the main hash function is MD5 message-digest algorithm [1,2,3].
+One of the main hash function is MD5 message-digest algorithm.
 In this document we will be talking about MD5 message-digest algorithm.<br/><br/>
 
 <p align="center">
@@ -22,6 +23,10 @@ MD5 was designed by Ronald Rivest in 1991 to replace an earlier hash function MD
 The MD5 message-digest algorithm, is a widely used hash function that takes as input a message of arbitrary length and produces as output a 128-bit "fingerprint" or "message digest" of the input. 
 It is conjectured that it is computationally infeasible to produce two messages having the same message digest, or to produce any message having a given prespecified target message digest. 
 The MD5 algorithm is intended for digital signature applications, where a large file must be "compressed" in a secure manner before being encrypted with a private (secret) key under a public-key cryptosystem such as Rivest–Shamir–Adleman(RSA).
+To do this project, I watched and followed the lecturer's video on how to code up SHA56 in C. The final version of the SHA56 is also included in this repository in the file sha-256.c. The source code of my project is in the file MD5.c<br/>
+Also, to do this project I researched and looked up online, how different people have done the MD5 message-digest algorithm in C and in different languages. Two particular examples caught my attention.
+I started by following these examples and doing my project like in the examples. So, I can better understand the different concepts about MD5 digest algorithm.
+I finally ended up doing my project in 3 different ways. The 3rd way was adapted from the two previous ways. All three ways are included in the md5.c file. The first two ways are commented out.
 <br/><br/>
 
 <p align="center">
