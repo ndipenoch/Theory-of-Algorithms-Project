@@ -306,6 +306,8 @@ int main(int argc, char **argv) {
 //Compile with : Compile with: gcc -o md5 -O3 -lm md5.c
 //Run with : .\md5 --run  "your string here"
 //Run test cases: .\md5 --test
+//Check the program file status: .\md5 --status
+//Get basic info about MD5:  .\md5 --about
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -589,7 +591,7 @@ int main(int argc, char **argv)
           printf("  a message of arbitrary length and produces as output \n");
           printf("  a 128-bit <fingerprint> or message \n");
           printf("  digest of the input. \n");
-          printf("  Copy Right: Mark Ndipenoch\n");
+          printf("  Copy Right: Mark Ndipenoch.\n");
           break;
 
         case 'h':
