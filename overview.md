@@ -35,7 +35,7 @@ A sequence of bits can be interpreted in a natural manner as a sequence of bytes
 Similarly, a sequence of bytes can be interpreted as a sequence of 32-bit words, where each consecutive group of four bytes is interpreted as a word with the low-order (least significant) byte given first.
 </b><br/>
 <p align="center">
-  <b>How to Run The Code</b><br/>
+  <b>How To Run The Code</b><br/>
 </p>
 To compile and run the code, do the following steps:</br>
 1. Clone and download the code from GitHub. You can do this by copying the URL of the repository. Then go to your chosen folder, then open the terminal and type git clone “paste the url here with out the openning and closing codes” and click enter. 
@@ -65,10 +65,20 @@ To Compile run  : gcc -o md5 -O3 -lm md5.c</br>
 To run : .\md5 --run  "your string here"</br>
 </br>
 <p align="center">
-  <b>How to Run Test Cases</b><br/>
+  <b>How To Run Test Cases</b><br/>
 </p>
 To Compile run  : gcc -o md5 -O3 -lm md5.c</br>
 To run : .\md5 --test </br>
+<p align="center">
+  <b>How to Check The Status Of The Program file</b><br/>
+</p>
+To Compile run  : gcc -o md5 -O3 -lm md5.c</br>
+To run : .\md5 --status </br>
+<p align="center">
+  <b>Get Basic Info About MD5</b><br/>
+</p>
+To Compile run  : gcc -o md5 -O3 -lm md5.c</br>
+To run : .\md5 --about </br>
 <p align="center">
   <b>MD5 Algorithm Description</b><br/>
 </p>
