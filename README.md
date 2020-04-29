@@ -68,10 +68,20 @@ To Compile run  : gcc -o md5 -O3 -lm md5.c</br>
 To run : .\md5 --run  "your string here"</br>
 </br>
 <p align="center">
-  <b>How to Run Test Cases</b><br/>
+  <b>How To Run Test Cases</b><br/>
 </p>
 To Compile run  : gcc -o md5 -O3 -lm md5.c</br>
 To run : .\md5 --test </br>
+<p align="center">
+  <b>How to Check The Status Of The Program file</b><br/>
+</p>
+To Compile run  : gcc -o md5 -O3 -lm md5.c</br>
+To run : .\md5 --status </br>
+<p align="center">
+  <b>Get Basic Info About MD5</b><br/>
+</p>
+To Compile run  : gcc -o md5 -O3 -lm md5.c</br>
+To run : .\md5 --about </br>
 <h4>Sample Test and Results</h4>
 -Input: "abc"</br>
  OutPut: "900150983cd24fb0d6963f7d28e17f72"</br>
