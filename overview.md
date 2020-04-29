@@ -10,7 +10,7 @@ Name: Mark Ndipenoch<br/>
 </p>
 Due to the rapid advancement of technology, the integrity of documents and security protocols should be preserved.
 One of the ways to achieve this is by using a digital signature. 
-A digital signature is a specific code which is generated from the function of producing a digital signature. 
+A digital signature is a specific code which is generated from the function of producing an electronic “fingerprints.” 
 One of the algorithms that is used to create the digital signature is a hash function. There are many hash functions.
 One of the main hash function is MD5 message-digest algorithm [1,2,3].
 In this document we will be talking about MD5 message-digest algorithm.<br/><br/>
@@ -38,9 +38,9 @@ Similarly, a sequence of bytes can be interpreted as a sequence of 32-bit words,
   <b>How to Run The Code</b><br/>
 </p>
 To compile and run the code, do the following steps:</br>
-1. Clone and download the code from GitHub. You can do this by copying the URL of the repository. Then go to your chosen folder, then open the terminal and type git clone “paste the url here” and click enter. 
+1. Clone and download the code from GitHub. You can do this by copying the URL of the repository. Then go to your chosen folder, then open the terminal and type git clone “paste the url here with out the openning and closing codes” and click enter. 
 The folder will be downloaded to that directory.</br>
-2. Then install the compiler which is GCC, if it is not already install.</br>
+2. Then install the C compiler which is GCC, if it is not already install.</br>
 •	If you are on a Linux machine</br>
 To install gcc you can run the below code on the command line</br>
 sudo apt install gcc</br>
@@ -72,11 +72,11 @@ To run : .\md5 --test </br>
 <p align="center">
   <b>MD5 Algorithm Description</b><br/>
 </p>
-We begin by supposing that we have a b-bit message as input, and that we wish to find its message digest. 
-Here b is an arbitrary nonnegative integer; b   may be zero, it need not be a multiple of eight, and it may be arbitrarily large. 
+We will begin by supposing that we have a b-bit message as input, and that we wish to find its message digest. 
+Here b is an arbitrary nonnegative integer; b may be zero, it needs not be a multiple of eight, and it may be arbitrarily large. 
 We imagine the bits of the message written down as follows:</br>
 
-          m_0 m_1 ... m_{b-1}</br>
+          m_0 m_1 ... m_{b-1}
 The following five steps are performed to compute the message digest of the message.</br>
 
 #### 1-	Append Padding Bits
@@ -118,7 +118,6 @@ See the rounds in the code.</br>
 
 #### 5-	Output
 The message digest produced as output is A, B, C, D. That is, we begin  with the low-order byte of A, and end with the high-order byte of D.
-This completes the description of MD5. A reference implementation in C is given in the appendix.
 
 <p align="center">
   <b>Complexity</b><br/>
@@ -127,7 +126,7 @@ The MD5 message-digest algorithm is a widely used hash function producing a 128-
 Hash functions(MD5 message-digest algorithm in our case) are one-way functions with an input a string of arbitrary length (the message) and an output a fixed length string (the hash value).
 The hash value is a kind of signature for that message. One-way functions work in one direction, meaning that it is easy to compute the hash value from a given message and hard to compute a message that hashes to a given hash value.
 Some applications strengthen the MD5 algorithm by adding a salt value to the plaintext or by applying the hash function multiple times.
-A salt is random data that is used as an additional input to a one-way function that hashes data.
+A salt is a random data that is used as an additional input to a one-way function that hashes data.
   <h4>Preliminaries</h4>
 MD5 operates on 32-bit unsigned integers called words, where we will number the bits from 0 (least significant bit) up to 31 (most significant bit).
 <h4>Definition of MD5</h4>
@@ -140,14 +139,15 @@ The input for the compression function MD5Compress(IHV, B) is an intermediate ha
 There are 64 steps (numbered 0 up to 63), split into four consecutive rounds of 16 steps each. 
 Each step uses a modular addition, a left rotation, and a non-linear function.</br>
 <h4>Security</h4>
-<h6>1-	Attempt to Reverse MD5 message-digest algorithm.</h6>
-If you ask me personally, can you reverse a message digest to get the original message ? From all my researches and the papers/articles I have read, my answer is no and yes.<br>
+<h6>1-	Attempt to Reverse MD5 message-digest Algorithm.</h6>
+If you ask me personally, can you reverse a message digest to get the original message ? From all my researches and the papers/articles I have read, my answer is no and yes. I will explain why and give to you my final answer below.<br>
 No, because practically it is impossible.  Since a lot of information is lost in producing a message digest. A message of any size produces a 32 digit (32 byte) hex number. Trying to reproduce a message from its hash is like trying to rebuild a burned building from a hand full of its ashes. You can identify the building from the wreckage, but cannot reconstruct it.
-Also, in some scenarios we can have very large or infinite possibilities and might not have the computer with enough power to compute all the possible possibilities. Imagine building the tallest building in the world Burj Khalifa  from a hand full of it ashes.
+Also, we can compute all the possible messages that can form the message digest but in most scenarios we will have very large or infinite possibilities and might not have the computer with enough power to compute all the possible possibilities. Imagine building the tallest building in the world Burj Khalifa  from a hand full of it ashes.
 In addition, this can be made harder or complicated if the MD5 hash is using a good salt.
 The salt, will increase the possible possibilities by a very large amount depending on how the salt is done.</br>
-Yes because, theoretically it sounds possible. if we have a database that contains all the possible buildings that can be gotten from that particular ashes, then one of the building will be correct/original building used. We can use brut force to do this. But this also can be made harder or complicated if the MD5 hash is using a good salt. 
-So, theoretically if we use brut force on a very power computer we can get the original message form the MD5 message digest. By brut force I mean trying out every single possible possibilities until we get the results. In some cases if the system is poorly constructed that it will allow users to give a hirt of what they use to compute the message digest. This will narrow down the possibilities when using brut force.
+Yes because, theoretically it sounds possible. if we have a database that contains all the possible buildings that can be gotten from that particular ashes, then one of the building will be the correct/original building used. We can use brut force to do this. But this also can be made harder or complicated if the MD5 hash is using a good salt.
+So, theoretically if we use brut force on a very power computer we can get the original message form the MD5 message digest. By brut force I mean trying out every single possible possibilities until we get the results. In some cases if the system is poorly constructed that it will allow users to give a hirt of what they use to compute the message digest. This will narrow down the possibilities when using brut force.<br/>
+So, to conclude my final answer is no.
 <h6>2- Collision detection</h6>
 The MD5 message-digest algorithm, was initially designed to be used as a cryptographic hash function, it has been found to suffer from extensive vulnerabilities. It can still be used as a checksum to verify data integrity, but only against unintentional corruption. It remains suitable for other non-cryptographic purposes, for example for determining the partition for a particular key in a partitioned database.</br>
 Practically it is impossible to reverse or compute an original message from a MD5 message digest but there are other security flaws like collision detection. Collision detection is having the same message digest from 2 or more different messages. </br>
@@ -161,7 +161,7 @@ Their attack is based on a combined additive and XOR differential method. Using 
 intermediate hash value and an accompanying message block, propagate through the compression function. They described the integer difference (−1, 0 or +1) in every bit of the intermediate working states Qt and even specific values for some bits.</br>
 Also, the setting of digital certificates is not entirely safe as Lenstra and de Weger[11] presented two colliding X.509 certificates with different public keys, but with identical signatures from a Certificate Authority. Although as they contain the same identity there is no realistic abuse scenario.
 <h4>Running Time</h4>
-The MD5 message-digest algorithm  was designed to be fast and it is. This is demonstrated as seen in the image below when the Running Time is compared to SHA256 Algorithm by D Rachmawati1, J T Tarigan1 and A B C Ginting,[9] in section 3.3.</br>
+The MD5 message-digest algorithm  was designed to be fast and it is. This is demonstrated as seen in the image below when the running time is compared to SHA256 algorithm by D Rachmawati1, J T Tarigan1 and A B C Ginting,[9] in section 3.3.</br>
  <p align="center">
   <img width="460" height="300" src="https://github.com/ndipenoch/Theory-of-Algorithms-Project/blob/master/runningTime.PNG">
 </p>
