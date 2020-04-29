@@ -22,7 +22,7 @@ In this document we will be talking about MD5 message-digest algorithm.<br/><br/
 MD5 was designed by Ronald Rivest in 1991 to replace an earlier hash function MD4,[8].
 The MD5 message-digest algorithm, is a widely used hash function that takes as input a message of arbitrary length and produces as output a 128-bit "fingerprint" or "message digest" of the input. 
 It is conjectured that it is computationally infeasible to produce two messages having the same message digest, or to produce any message having a given prespecified target message digest. 
-The MD5 algorithm is intended for digital signature applications, where a large file must be "compressed" in a secure manner before being encrypted with a private (secret) key under a public-key cryptosystem such as Rivest–Shamir–Adleman(RSA).
+The MD5 algorithm is intended for digital signature applications, where a large file must be "compressed" in a secure manner before being encrypted with a private (secret) key under a public-key cryptosystem such as Rivest–Shamir–Adleman(RSA).<br/>
 To do this project, I watched and followed the lecturer's video on how to code up SHA56 in C. The final version of the SHA56 is also included in this repository in the file sha-256.c. The source code of my project is in the file MD5.c<br/>
 Also, to do this project I researched and looked up online, how different people have done the MD5 message-digest algorithm in C and in different languages. Two particular examples caught my attention.
 I started by following these examples and doing my project like in the examples. So, I can better understand the different concepts about MD5 digest algorithm.
