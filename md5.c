@@ -310,6 +310,11 @@ int main(int argc, char **argv) {
 #include <string.h>
 #include <stdlib.h>
 #include <getopt.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <time.h>
 
 #define uchar unsigned char
 #define uint unsigned int
@@ -547,8 +552,9 @@ int main(int argc, char **argv)
           /* These options don’t set a flag.
              We distinguish them by their indices. */
           {"help",     no_argument,       0, 'h'},
-          {"version",  no_argument,       0, 'v'},
+          {"status",  no_argument,        0, 's'},
           {"test",     no_argument,       0, 't'},
+          {"about",    no_argument,       0, 'a'},
 		      {"run",  required_argument,     0, 'r'},
           {0, 0, 0, 0}
         };
@@ -574,6 +580,18 @@ int main(int argc, char **argv)
           printf ("\n");
           break;
 
+        case 'a':
+          printf("          This is an MD5 Message-Digest Algorithm. \n");
+          printf("  MD5 was designed by Ronald Rivest in 1991 to \n");
+          printf("  replace an earlier hash function MD4.\n");
+          printf("  The MD5 message-digest algorithm, is a widely \n");
+          printf("  used hash function that takes as input \n");
+          printf("  a message of arbitrary length and produces as output \n");
+          printf("  a 128-bit <fingerprint> or message \n");
+          printf("  digest of the input. \n");
+          printf("  Copy Right: Mark Ndipenoch\n");
+          break;
+
         case 'h':
           printf ("Compile with : Compile with: gcc -o md5 -O3 -lm md5.c \n");
           printf ("Run with : .\\md5 --run 'your string here' \n");
@@ -585,8 +603,21 @@ int main(int argc, char **argv)
           printf ("2) Input 0123456789 and Output: 781e5e245d69b566979b86e28d23f2c7 \n");
           break;
 
-        case 'v':
-          puts ("version option -v\n");
+        case 's':
+        //Adapted from https://c-for-dummies.com/blog/?p=3004
+         printf("");
+         struct stat filestat;
+         stat("md5.c",&filestat);
+         /* newline included in ctime() output */
+         printf(" File access time %s",
+            ctime(&filestat.st_atime)
+          );
+         printf(" File modify time %s",
+            ctime(&filestat.st_mtime)
+          );
+         printf(" File changed time %s",
+            ctime(&filestat.st_ctime)
+          );
           break;
 
         case 't':
@@ -620,10 +651,10 @@ int main(int argc, char **argv)
           printf("Expected:  %s\n", testRslt);
           printf("Actual:    %s\n", testOutputs[loop]);
           if (strcmp(testRslt,testOutputs[loop]) == 0){
-               printf("PASSED\n");
+               printf("Status:    PASSED\n");
                }
           else{
-               printf("FAILED\n");
+               printf("Status:    FAILED\n");
                }
           }
           break;
